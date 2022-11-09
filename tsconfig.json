@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": [
+      "es6",
+      "es7",
+      "esnext",
+      "dom"
+    ],
+    "strict": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "alwaysStrict": true,
+    // "strictNullChecks": true, // 216
+    "noUncheckedIndexedAccess": true,
+    // "noImplicitAny": true, // 166
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "out",
+    "declaration": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@helper/*": [
+        "helper/*"
+      ],
+    },
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next-i18next.config.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
