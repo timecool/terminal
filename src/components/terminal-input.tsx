@@ -49,12 +49,12 @@ const TerminalInput = ({ inputRef }: IProps) => {
   };
 
   return (
-    <div className="flex pt-2">
+    <div className="flex py-3">
       <div className="px-3 bg-white rounded-l-xl">
         <FontAwesomeIcon icon={faCoffee} />
       </div>
       <div className="bg-teal-500 px-3 text-white font-black rounded-r-xl">
-        <div className="flex">
+        <div className="flex whitespace-nowrap">
           {!terminalPath ? (
             <>
               <FontAwesomeIcon icon={faHome} className="pr-2 pt-1" />

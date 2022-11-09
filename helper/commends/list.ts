@@ -1,5 +1,6 @@
-import { images, paths } from '@helper/data';
+import { images, paths, projects, thesis } from '@helper/data';
 import TerminalStore from '@helper/terminal-store';
+import { includes } from 'lodash';
 
 export const listPathsCommend = () => {
   const { setNewCommend, terminalPath } = TerminalStore.getState();
@@ -16,6 +17,22 @@ export const listPathsCommend = () => {
       commend: 'll',
       result: {
         lines: images,
+      },
+    });
+  }
+  if (terminalPath === 'projects') {
+    setNewCommend({
+      commend: 'll',
+      result: {
+        lines: projects,
+      },
+    });
+  }
+  if (includes(terminalPath, 'bachelor-thesis')) {
+    setNewCommend({
+      commend: 'll',
+      result: {
+        lines: thesis,
       },
     });
   }
