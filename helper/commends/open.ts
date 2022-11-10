@@ -1,10 +1,9 @@
 import { getNewPathObject } from '@helper/path';
 import TerminalStore from '@helper/terminal-store';
-import { has, includes, last, replace, size } from 'lodash';
+import { find, has, includes, last, replace, size } from 'lodash';
 
 export const openCommend = (commend: string) => {
   const {
-    terminalPath,
     setNewOpenImages,
     setNewCommend,
     setNewOpenPdf,
@@ -34,6 +33,15 @@ export const openCommend = (commend: string) => {
         });
         return;
       }
+    }
+
+    if (has(pathObject, 'git')) {
+      const gitObject = find(pathObject.git, (g) => g.name === file);
+      window.open(gitObject.link, '_blank');
+      setNewCommend({
+        commend,
+      });
+      return;
     }
   }
 

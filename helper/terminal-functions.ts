@@ -3,6 +3,7 @@ import { includes } from 'lodash';
 
 import { cdCommend } from './commends/cd';
 import { clearCommend } from './commends/clear';
+import { codeCommend } from './commends/code';
 import { helpCommend } from './commends/help';
 import { listPathsCommend } from './commends/list';
 import { openCommend } from './commends/open';
@@ -38,7 +39,8 @@ export const findCommend = (commend: string) => {
     return;
   }
 
-  if (includes(commend, 'code')) {
+  if (commend.startsWith('code ')) {
+    codeCommend(commend);
     return;
   }
 

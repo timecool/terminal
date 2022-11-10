@@ -1,6 +1,6 @@
 import { cloneDeep, concat, findIndex, has, isEmpty, remove } from 'lodash';
 
-import { paths } from './data';
+import { paths } from '../src/utils/data';
 import TerminalStore from './terminal-store';
 
 const stylePath = (path: string[]) => {
