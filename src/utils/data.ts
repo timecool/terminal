@@ -7,17 +7,10 @@ const images = [
   'vincent.jpg',
 ];
 
-const projects = ['smartwatch_auf_den_digitalen_vormarsch.pdf'];
-const thesis = [
-  'hyperwork-frontend.git',
-  'hyperwork-backend.git',
-  'thesis.pdf',
-];
-
 export const paths = {
   projects: {
     bachelor_thesis: {
-      files: thesis,
+      files: ['thesis.pdf'],
       git: [
         {
           name: 'hyperwork-frontend.git',
@@ -30,13 +23,15 @@ export const paths = {
       ],
     },
     my_food_coop: {},
-    files: projects,
+    files: ['smartwatch_auf_den_digitalen_vormarsch.pdf'],
     git: [
       { name: 'bw_jobs.git', link: 'https://github.com/Browserwerk/bw_jobs' },
       { name: 'terminal.git', link: 'https://github.com/timecool/terminal' },
     ],
   },
-  about_me: {},
+  about_me: {
+    files: ['resume.pdf'],
+  },
   images: {
     files: images,
   },
