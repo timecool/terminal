@@ -1,6 +1,4 @@
-export const paths = ['projects', 'about-me', 'images'];
-
-export const images = [
+const images = [
   'emma.jpg',
   'mainz.jpg',
   'morning.jpg',
@@ -9,14 +7,23 @@ export const images = [
   'vincent.jpg',
 ];
 
-export const projects = [
-  'bachelor-thesis',
-  'my-food-coop',
-  'bw_jobs.git',
-  'smartwatch_auf_den_digitalen_vormarsch.pdf',
-];
-export const thesis = [
+const projects = ['bw_jobs.git', 'smartwatch_auf_den_digitalen_vormarsch.pdf'];
+const thesis = [
   'hyperwork-frontend.git',
   'hyperwork-backend.git',
   'thesis.pdf',
 ];
+
+export const paths = {
+  projects: {
+    bachelor_thesis: {
+      files: thesis,
+    },
+    my_food_coop: {},
+    files: projects,
+  },
+  about_me: {},
+  images: {
+    files: images,
+  },
+};

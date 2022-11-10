@@ -1,48 +1,21 @@
-import { paths, projects } from '@helper/data';
+import { getNewPath, getPathObject } from '@helper/path';
 import TerminalStore from '@helper/terminal-store';
-import { includes, replace, size, split } from 'lodash';
+import { isEmpty, replace } from 'lodash';
 
 export const cdCommend = (commend: string) => {
-  const { setTerminalPath, terminalPath, setNewCommend } =
-    TerminalStore.getState();
+  const { setTerminalPath, setNewCommend } = TerminalStore.getState();
   const path = replace(commend, 'cd ', '');
 
-  if (path === '..') {
-    const pathArray = split(terminalPath, '/');
-    if (size(pathArray) > 1) setTerminalPath(pathArray[0]);
-    else setTerminalPath('');
-    setNewCommend({
-      commend,
-    });
-    return;
-  }
-  if (includes(path, '.')) {
-    setNewCommend({
-      commend,
-      result: {
-        lines: ['This is not a folder'],
-        error: true,
-      },
-    });
-    return;
-  }
-  if (includes(paths, path) && !terminalPath) {
-    setTerminalPath(path);
-    setNewCommend({
-      commend,
-    });
-    return;
-  }
-  if (terminalPath === 'projects') {
-    if (includes(projects, path)) {
-      setTerminalPath(`${terminalPath}/${path}`);
-      setNewCommend({
-        commend,
-      });
-      return;
-    }
-  }
+  const newPath = getNewPath(path);
+  const currentPathData = getPathObject(newPath);
 
+  if (!isEmpty(currentPathData)) {
+    setTerminalPath(newPath);
+    setNewCommend({
+      commend,
+    });
+    return;
+  }
   setNewCommend({
     commend,
     result: {

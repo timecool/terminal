@@ -1,6 +1,6 @@
-import { images, projects, thesis } from '@helper/data';
+import { getNewPathObject } from '@helper/path';
 import TerminalStore from '@helper/terminal-store';
-import { includes, replace, size } from 'lodash';
+import { has, includes, last, replace, size } from 'lodash';
 
 export const openCommend = (commend: string) => {
   const {
@@ -11,38 +11,32 @@ export const openCommend = (commend: string) => {
     openImages,
     openPdfs,
   } = TerminalStore.getState();
+  const regex = /.([^.]+)$/;
+  const path = replace(commend, 'open ', '');
+  if (path.match(regex)) {
+    const pathArray = path.split('/');
+    const file = last(pathArray);
+    pathArray.pop();
+    const pathObject = getNewPathObject(replace(path, file, ''));
 
-  if (terminalPath === 'images') {
-    const name = replace(commend, 'open ', '');
-    if (includes(images, name)) {
-      setNewOpenImages({ name, id: size(openImages) });
-      setNewCommend({
-        commend,
-      });
+    if (has(pathObject, 'files') && includes(pathObject.files, file)) {
+      if (file.endsWith('.jpg') || file.endsWith('.png')) {
+        setNewOpenImages({ name: file, id: size(openImages) });
+        setNewCommend({
+          commend,
+        });
+        return;
+      }
+      if (file.endsWith('.pdf')) {
+        setNewOpenPdf({ name: file, id: size(openPdfs) });
+        setNewCommend({
+          commend,
+        });
+        return;
+      }
     }
-    return;
   }
 
-  if (
-    terminalPath === 'projects' ||
-    includes(terminalPath, 'bachelor-thesis')
-  ) {
-    const name = replace(commend, 'open ', '');
-    if (includes(name, '.pdf') && includes([...projects, ...thesis], name)) {
-      setNewOpenPdf({ name, id: size(openPdfs) });
-      setNewCommend({
-        commend,
-      });
-      return;
-    }
-    if (includes(name, '.git') && includes([...projects, ...thesis], name)) {
-      setNewCommend({
-        commend,
-      });
-      window.open(`https://github.com/timecool/${name}`, '_blank');
-      return;
-    }
-  }
   setNewCommend({
     commend,
     result: {

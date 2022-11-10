@@ -2,7 +2,7 @@ import { faCoffee, faFolder, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findCommend } from 'helper/terminal-functions';
 import TerminalStore from 'helper/terminal-store';
-import { size } from 'lodash';
+import { isEmpty, size } from 'lodash';
 import React, { useState } from 'react';
 
 interface IProps {
@@ -55,7 +55,7 @@ const TerminalInput = ({ inputRef }: IProps) => {
       </div>
       <div className="bg-teal-500 px-3 text-white font-black rounded-r-xl">
         <div className="flex whitespace-nowrap">
-          {!terminalPath ? (
+          {isEmpty(terminalPath) ? (
             <>
               <FontAwesomeIcon icon={faHome} className="pr-2 pt-1" />
               {'/~'}
@@ -63,7 +63,7 @@ const TerminalInput = ({ inputRef }: IProps) => {
           ) : (
             <>
               <FontAwesomeIcon icon={faFolder} className="pr-2 pt-1" />/
-              {terminalPath}
+              {terminalPath.join('/')}
             </>
           )}
         </div>

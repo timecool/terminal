@@ -24,8 +24,8 @@ export const findCommend = (commend: string) => {
     return;
   }
 
-  if (commend === 'll') {
-    listPathsCommend();
+  if (commend.startsWith('ll ') || commend === 'll') {
+    listPathsCommend(commend);
     return;
   }
 

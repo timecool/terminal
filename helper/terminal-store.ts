@@ -7,7 +7,7 @@ import create from 'zustand';
 interface TerminalState {
   commands: ITerminalCommends[];
   terminalInput: string;
-  terminalPath: string;
+  terminalPath: string[];
   openImages: IImage[];
   openPdfs: IPdf[];
 
@@ -17,7 +17,7 @@ interface TerminalState {
   closeOneImages: (id: number) => void;
   setNewOpenImages: (openImage: IImage) => void;
 
-  setTerminalPath: (terminalPath: string) => void;
+  setTerminalPath: (terminalPath: string[]) => void;
   setTerminalInput: (terminalInput: string) => void;
   clearCommends: () => void;
   setNewCommend: (command: ITerminalCommends) => void;
@@ -26,7 +26,7 @@ interface TerminalState {
 const TerminalStore = create<TerminalState>((set, get) => ({
   commands: [],
   terminalInput: '',
-  terminalPath: '',
+  terminalPath: [],
   openImages: [],
   openPdfs: [],
 
@@ -44,7 +44,8 @@ const TerminalStore = create<TerminalState>((set, get) => ({
   setNewOpenImages: (openImage: IImage) =>
     set(() => ({ openImages: [...get().openImages, openImage] })),
 
-  setTerminalPath: (terminalPath: string) => set(() => ({ terminalPath })),
+  setTerminalPath: (terminalPath: string[]) => set(() => ({ terminalPath })),
+
   setTerminalInput: (terminalInput: string) => set(() => ({ terminalInput })),
   clearCommends: () => set(() => ({ commands: [] })),
   setNewCommend: (command: ITerminalCommends) =>

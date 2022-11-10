@@ -1,39 +1,25 @@
-import { images, paths, projects, thesis } from '@helper/data';
+import { getNewPathObject } from '@helper/path';
 import TerminalStore from '@helper/terminal-store';
-import { includes } from 'lodash';
+import { has, keys, pull, replace } from 'lodash';
 
-export const listPathsCommend = () => {
-  const { setNewCommend, terminalPath } = TerminalStore.getState();
-  if (!terminalPath) {
-    setNewCommend({
-      commend: 'll',
-      result: {
-        lines: paths,
-      },
-    });
-  }
-  if (terminalPath === 'images') {
-    setNewCommend({
-      commend: 'll',
-      result: {
-        lines: images,
-      },
-    });
-  }
-  if (terminalPath === 'projects') {
-    setNewCommend({
-      commend: 'll',
-      result: {
-        lines: projects,
-      },
-    });
-  }
-  if (includes(terminalPath, 'bachelor-thesis')) {
-    setNewCommend({
-      commend: 'll',
-      result: {
-        lines: thesis,
-      },
-    });
-  }
+export const listPathsCommend = (commend: string) => {
+  const { setNewCommend } = TerminalStore.getState();
+
+  let path = replace(commend, 'll', '');
+  path = replace(path, ' ', '');
+  const currentPathObject = getNewPathObject(path);
+
+  let objectKeys;
+
+  if (has(currentPathObject, 'files')) {
+    const keysOfPaths = keys(currentPathObject);
+    const { files } = currentPathObject;
+    objectKeys = [...pull(keysOfPaths, 'files'), ...files];
+  } else objectKeys = keys(currentPathObject);
+  setNewCommend({
+    commend,
+    result: {
+      lines: objectKeys,
+    },
+  });
 };
