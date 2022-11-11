@@ -12,9 +12,9 @@ export const codeCommend = (commend: string) => {
     pathArray.pop();
     const pathObject = getNewPathObject(replace(path, file, ''));
 
-    if (has(pathObject, 'git')) {
-      const gitObject = find(pathObject.git, (g) => g.name === file);
-      window.open(replace(gitObject.link, '.com', '.dev'), '_blank');
+    if (has(pathObject, 'linkData') && file.endsWith('.git')) {
+      const linkObject = find(pathObject.linkData, (g) => g.name === file);
+      window.open(replace(linkObject.link, '.com', '.dev'), '_blank');
       setNewCommend({
         commend,
       });

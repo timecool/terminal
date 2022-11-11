@@ -17,9 +17,12 @@ export const listPathsCommend = (commend: string) => {
     const { files } = currentPathObject;
     objectKeys = [...pull(objectKeys, 'files'), ...files];
   }
-  if (has(currentPathObject, 'git')) {
-    const { git } = currentPathObject;
-    objectKeys = [...pull(objectKeys, 'git'), ...map(git, (g) => g.name)];
+  if (has(currentPathObject, 'linkData')) {
+    const { linkData } = currentPathObject;
+    objectKeys = [
+      ...pull(objectKeys, 'linkData'),
+      ...map(linkData, (g) => g.name),
+    ];
   }
   setNewCommend({
     commend,

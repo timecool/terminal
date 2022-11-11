@@ -35,9 +35,9 @@ export const openCommend = (commend: string) => {
       }
     }
 
-    if (has(pathObject, 'git')) {
-      const gitObject = find(pathObject.git, (g) => g.name === file);
-      window.open(gitObject.link, '_blank');
+    if (has(pathObject, 'linkData')) {
+      const linkObject = find(pathObject.linkData, (g) => g.name === file);
+      window.open(linkObject.link, '_blank');
       setNewCommend({
         commend,
       });
